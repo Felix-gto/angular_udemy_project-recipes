@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';      // Use the RecipeService instead of emitting custom event... deleted: EventEmitter, Output
 import { Recipe } from '../recipe.model';
 
 // Import the RecipeService
@@ -14,7 +14,8 @@ export class RecipeListComponent implements OnInit {
   // only declare the recipes property, we will get a copy of the array using the Service
   recipes: Recipe[] = [];
 
-  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+  /*  Removed this custom event as we are using the RecipeService to listen to event*/
+  // @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
   // Add the RecipeService to the constructor, and use it in ngOnInit to get a copy of the recipes array (getRecipes())
   constructor(private recipeService: RecipeService) { }
@@ -23,8 +24,9 @@ export class RecipeListComponent implements OnInit {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  onRecipeSelected(recipe: Recipe) {
-    this.recipeWasSelected.emit(recipe);
-  }
+  /*  Removed this custom event method as we are using the RecipeService to listen to event*/
+  // onRecipeSelected(recipe: Recipe) {
+  //   this.recipeWasSelected.emit(recipe);
+  // }
 
 }

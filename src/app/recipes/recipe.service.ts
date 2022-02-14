@@ -1,7 +1,12 @@
+import { EventEmitter } from "@angular/core";
+
 // Import the Recipe template from recipe.model
 import { Recipe } from "./recipe.model";
 
 export class RecipeService {
+
+    // New public property added (object extantiated using EventEmitter - import from @angular/Core), it will hold Recipe data
+    recipeSelected = new EventEmitter<Recipe>();
 
     // Make the recipes: Recipe[] array private so we can't directly access it from outside. To get access, we create the getRecipes() method
     private recipes: Recipe[] = [

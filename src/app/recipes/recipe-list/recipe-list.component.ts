@@ -1,6 +1,8 @@
-import { outputAst } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
+
+// Import the RecipeService
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,16 +11,16 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeListComponent implements OnInit {
 
-  recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg'),
-    new Recipe('Another Test Recipe', 'This is simply a test', 'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg')
-  ];
+  // only declare the recipes property, we will get a copy of the array using the Service
+  recipes: Recipe[] = [];
 
   @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
-  constructor() { }
+  // Add the RecipeService to the constructor, and use it in ngOnInit to get a copy of the recipes array (getRecipes())
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
   }
 
   onRecipeSelected(recipe: Recipe) {

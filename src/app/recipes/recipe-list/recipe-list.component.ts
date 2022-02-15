@@ -20,7 +20,7 @@ export class RecipeListComponent implements OnInit {
   // Add the RecipeService to the constructor, and use it in ngOnInit to get a copy of the recipes array (getRecipes())
   constructor(private recipeService: RecipeService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.recipes = this.recipeService.getRecipes();
   }
 

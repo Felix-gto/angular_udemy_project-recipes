@@ -6,6 +6,8 @@ export class Recipe {
     public name: string;
     public description: string;
     public imagePath: string;
+
+    // Add the ingredients array as well in the recipe template
     public ingredients: Ingredient[];
 
     constructor(name:string, desc: string, imagePath: string, ingredients: Ingredient[]) {

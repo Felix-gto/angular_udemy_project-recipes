@@ -11,9 +11,7 @@ import { Recipe } from '../../recipe.model';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
-
-   //Custom event for which we listen to in recipe-list.component.html    -> Removed sa we are using the RecipeService
-  // @Output() recipeSelected = new EventEmitter<void>();
+  @Input() index: number;
 
   ngOnInit(): void {
   }

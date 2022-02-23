@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';     // Use the RecipeS
 
 import { Recipe } from '../../recipe.model';
 
-import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -16,16 +15,7 @@ export class RecipeItemComponent implements OnInit {
    //Custom event for which we listen to in recipe-list.component.html    -> Removed sa we are using the RecipeService
   // @Output() recipeSelected = new EventEmitter<void>();
 
-  constructor(private recipeService: RecipeService) { }
-
   ngOnInit(): void {
-  }
-
-  onSelected() {
-    // this.recipeSelected.emit();     // Delete -> use the RecipeService instead
-    
-    this.recipeService.recipeSelected.emit(this.recipe);
-
   }
 
 }

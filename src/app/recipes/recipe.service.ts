@@ -41,6 +41,11 @@ export class RecipeService {
         return this.recipes.slice();
     }
 
+    // index = equivalent to recipe id. Gets recipe associated with it's index from the Recipe[] array
+    getRecipe(index:number) {
+        return this.recipes[index];
+    }
+
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
     }

@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
@@ -7,9 +7,6 @@ import { Recipe } from "./recipe.model";
 
 @Injectable()
 export class RecipeService {
-
-    // New public property added (object extantiated using EventEmitter - import from @angular/Core), it will hold Recipe data
-    recipeSelected = new EventEmitter<Recipe>();
 
     // Make the recipes: Recipe[] array private so we can't directly access it from outside. To get access, we create the getRecipes() method
     private recipes: Recipe[] = [
@@ -30,7 +27,6 @@ export class RecipeService {
              new Ingredient('Meat', 1)
          ])
     ];
-
 
     constructor(private slService: ShoppingListService) {
 

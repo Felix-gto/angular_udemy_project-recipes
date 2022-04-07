@@ -1,10 +1,11 @@
-import { EventEmitter } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
+
+import { Subject } from "rxjs";
 
 export class ShoppingListService {
 
-    // Service Event created which emits our Ingredient[] Array - informs our component that new data is available - ingredients have been changed
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
+    // Service Event created (Subject) which emits our Ingredient[] Array - informs our component that new data is available - ingredients have been changed
+    ingredientsChanged = new Subject<Ingredient[]>();
 
    private ingredients: Ingredient[] = [
         new Ingredient('Apples', 5),
@@ -20,7 +21,7 @@ export class ShoppingListService {
         this.ingredients.push(ingredient);
 
         // Execute whenever we add an ingredient to display the updated version of our ingredients[] array
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
     
 
@@ -31,7 +32,7 @@ export class ShoppingListService {
         
         // Javascript Spread operator to push ingredients from the recipe detail to the Shopping List using the ShoppingList service injected in the RecipeService
         this.ingredients.push(...ingredients);
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
     
 }

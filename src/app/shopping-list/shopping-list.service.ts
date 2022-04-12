@@ -7,6 +7,8 @@ export class ShoppingListService {
     // Service Event created (Subject) which emits our Ingredient[] Array - informs our component that new data is available - ingredients have been changed
     ingredientsChanged = new Subject<Ingredient[]>();
 
+    startedEditing = new Subject<number>();
+
    private ingredients: Ingredient[] = [
         new Ingredient('Apples', 5),
         new Ingredient('Tomatoes', 10),
@@ -15,7 +17,11 @@ export class ShoppingListService {
     // Get a copy of our original ingredients array defined above
     getIngredients() {
         return this.ingredients.slice();
-    }   
+    }
+
+    getIngredient(index: number) {
+        return this.ingredients[index];
+    }
 
     addIngredient(ingredient: Ingredient) {
         this.ingredients.push(ingredient);
@@ -26,12 +32,21 @@ export class ShoppingListService {
     
 
     addIngredients(ingredients: Ingredient[]) {
-        // for(let ingredient of ingredients) {
-        //     this.addIngredient(ingredient);
-        // }
-        
+
         // Javascript Spread operator to push ingredients from the recipe detail to the Shopping List using the ShoppingList service injected in the RecipeService
         this.ingredients.push(...ingredients);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    // Update Ingredient if we are in Edit Mode (see shopping-edit component)
+    updateIngredient(index: number, newIngredient: Ingredient) {
+        this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    // Delete Ingredient (get the index of the clicked ingredient and remove it from the ingredients[] array)
+    deleteIngredient(index: number) {
+        this.ingredients.splice(index, 1);
         this.ingredientsChanged.next(this.ingredients.slice());
     }
     

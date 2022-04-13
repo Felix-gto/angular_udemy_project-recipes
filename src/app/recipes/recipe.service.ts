@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
@@ -7,6 +8,9 @@ import { Recipe } from "./recipe.model";
 
 @Injectable()
 export class RecipeService {
+
+    // Add or Update Recipe - Observable - pass the new array of Recipes as a value when we update or add a new recipe -> listen to this observable in the recipe-list component
+    recipesChanged = new Subject<Recipe[]>();
 
     // Make the recipes: Recipe[] array private so we can't directly access it from outside. To get access, we create the getRecipes() method
     private recipes: Recipe[] = [
@@ -44,6 +48,28 @@ export class RecipeService {
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
+    }
+
+    // recipeFORM - Add a new Recipe
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+
+        // Emit a new copy of the recipes[] array
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // recipeFORM - Update existing Recipe
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+        
+        // Emit a new copy of the recipes[] array
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // Delete Recipe
+    deleteRecipe(index: number) {
+       this.recipes.splice(index, 1) ;
+       this.recipesChanged.next(this.recipes.slice());
     }
 
 }

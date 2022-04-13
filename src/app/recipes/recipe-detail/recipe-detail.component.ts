@@ -37,4 +37,11 @@ export class RecipeDetailComponent implements OnInit {
     // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});  // Option 2 - Construct the route more precisely (more complex - same result)
   }
 
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+
+    // Navigate to the /recipes page after deleting a recipe (without this it deletes it but still displays it in the recipe detail area...)
+    this.router.navigate(['/recipes']);
+  }
+
 }

@@ -1,0 +1,17 @@
+button {
+    margin: auto 0.25rem 10px;
+}
+
+.ingredients {
+    margin-top: 10px;
+}
+
+.add-ingredient {
+    margin-top: 10px;
+}
+
+/* FORM VALIDATION */
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

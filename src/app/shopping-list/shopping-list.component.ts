@@ -26,11 +26,13 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   }
 
+  // Emit the index of the clicked ingredient using the Shopping List Service (startedEditing = Subject (observable)) -> so we can access it in the Shopping Edit Component
   onEditItem(index: number) {
     this.slService.startedEditing.next(index);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
+    // Clean up subscription to not create a memory leak
     this.subscription.unsubscribe();
   }
 

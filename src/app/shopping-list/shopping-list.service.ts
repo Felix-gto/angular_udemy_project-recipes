@@ -7,6 +7,7 @@ export class ShoppingListService {
     // Service Event created (Subject) which emits our Ingredient[] Array - informs our component that new data is available - ingredients have been changed
     ingredientsChanged = new Subject<Ingredient[]>();
 
+    // Subject -> observable when we click on the ingredient to start editing -> emit a number = id(index) of the clicked ingredient
     startedEditing = new Subject<number>();
 
    private ingredients: Ingredient[] = [
@@ -40,13 +41,19 @@ export class ShoppingListService {
 
     // Update Ingredient if we are in Edit Mode (see shopping-edit component)
     updateIngredient(index: number, newIngredient: Ingredient) {
+
+        // Set the clicked ingredient to be the new submitted ingredient
         this.ingredients[index] = newIngredient;
+
+        // Emit copy of new updated ingredients[] using the shopping list service
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
     // Delete Ingredient (get the index of the clicked ingredient and remove it from the ingredients[] array)
     deleteIngredient(index: number) {
+        // Remove 1 element starting at the array position = index
         this.ingredients.splice(index, 1);
+
         this.ingredientsChanged.next(this.ingredients.slice());
     }
     

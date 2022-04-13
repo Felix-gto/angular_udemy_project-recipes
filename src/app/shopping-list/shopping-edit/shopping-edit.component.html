@@ -7,6 +7,7 @@
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
 
+          <!-- Ingredient NAME input field - Validator: required -->
           <input
            type="text" 
            id="name" 
@@ -21,6 +22,7 @@
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
 
+          <!-- Ingredient AMOUNT Input field - Validators: pattern added to only validate numbers > 0 / required-->
           <input
            type="number" 
            id="amount" 
@@ -37,8 +39,14 @@
 
       <div class="row">
         <div class="col-xs-12">
+
+          <!-- Update / Add button - disabled if form is not valid, add ingredient or update ingredient depending if we are in editMode or not -->
           <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+
+          <!-- Delete Button if we are in Edit Mode -->
           <button class="btn btn-danger" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
+
+          <!-- Clear Button -->
           <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
         </div>
       </div>

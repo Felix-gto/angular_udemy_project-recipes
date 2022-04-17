@@ -109,7 +109,7 @@ export class RecipeEditComponent implements OnInit {
 
     // RECIPE FORM
     this.recipeForm = new FormGroup( {
-      // // assign recipeName as default Value - same for imagePath etc.
+      // assign recipeName as default Value - same for imagePath etc.
       'name': new FormControl(recipeName, Validators.required),
       'imagePath': new FormControl(recipeImagePath, Validators.required),
       'description': new FormControl(recipeDescription, Validators.required),
